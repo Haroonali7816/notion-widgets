@@ -272,8 +272,8 @@
    date:     &sem=2026-10-01,2027-03-31&semname=WS 26/27
 ------------------------------------------------- */
 const q = new URLSearchParams(location.search);
-const W = q.get('w') || 'location';
-const theme = q.get('theme') || (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+const W = q.get('w') || document.documentElement.dataset.widget || 'location';
+const theme = q.get('theme') || document.documentElement.dataset.defaultTheme || (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
 document.documentElement.dataset.theme = theme;
 if (q.get('bg') === 'transparent') document.body.classList.add('embed-transparent');
 const TZ = q.get('tz') || 'Europe/Berlin';

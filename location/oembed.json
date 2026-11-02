@@ -1,0 +1,10 @@
+{
+  "version": "1.0",
+  "type": "rich",
+  "provider_name": "notion-widgets",
+  "provider_url": "https://haroonali7816.github.io/notion-widgets/",
+  "title": "Location widget",
+  "width": 760,
+  "height": 260,
+  "html": "<iframe src=\"https://haroonali7816.github.io/notion-widgets/location/\" width=\"760\" height=\"260\" style=\"border:0;width:100%\" frameborder=\"0\" allowtransparency=\"true\"></iframe>"
+}
