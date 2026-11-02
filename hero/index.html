@@ -41,9 +41,9 @@
   * { box-sizing: border-box; margin: 0; padding: 0; }
   html, body { height: 100%; }
   body {
-    background: var(--bg); background-image: var(--glow); color: var(--text);
+    background: transparent; color: var(--text);
     font-family: "Geist", system-ui, sans-serif; -webkit-font-smoothing: antialiased;
-    padding: 14px; overflow-y: auto; scrollbar-width: none;
+    padding: 2px; overflow-y: auto; scrollbar-width: none;
   }
   body::-webkit-scrollbar { display: none; }
   .mono { font-family: "Geist Mono", ui-monospace, monospace; }
@@ -58,6 +58,7 @@
   .greet h1 { font-size: clamp(20px, 2.6vw, 27px); font-weight: 600; letter-spacing: -.02em; }
   .greet h1 em { font-family: "Instrument Serif", serif; font-style: italic; font-weight: 400; font-size: 1.12em; color: var(--accent); }
   .greet p { color: var(--muted); font-size: 13px; margin-top: 3px; }
+  .today-chip { font: 500 12px 'Geist Mono', monospace; color: var(--muted); padding: 7px 12px; border: 1px solid var(--line); border-radius: 999px; background: var(--panel); }
   .nav { display: flex; gap: 6px; flex-wrap: wrap; }
   .pill {
     display: inline-flex; align-items: center; gap: 7px; padding: 8px 13px; border-radius: 999px;
@@ -208,7 +209,7 @@
       <h1><span id="hello">Good day</span>, <em id="name">Haroon</em></h1>
       <p id="sub">—</p>
     </div>
-    <nav class="nav" id="nav"></nav>
+    <div class="today-chip" id="today-chip"></div>
   </header>
 
   <main class="grid">
@@ -322,16 +323,7 @@ function partsIn(tz, d = new Date()) {
 }
 function tzAbbr(tz) { try { return new Intl.DateTimeFormat('en-GB', { timeZone: tz, timeZoneName: 'short' }).formatToParts(new Date()).find(p => p.type === 'timeZoneName').value; } catch { return ''; } }
 
-/* ---------- Header: greeting + quick links into Notion ---------- */
-const N = id => `https://www.notion.so/${id}`;
-const links = [
-  ['✅', 'To-Do', N('80b2aadb51da4f26b42381ffe588d937'), 'main'],
-  ['🎓', 'University', N('28ad52eaaafb809a899df659c16e4590')],
-  ['💼', 'Job Hunt', N('3aed52eaaafb81ee8abfd42174d0ecc7')],
-  ['🌱', 'Personal', N('f0c115030703480c89e5b0b5afbb3378')],
-];
-document.getElementById('nav').innerHTML = links.map(([i, t, u, c]) =>
-  `<a class="pill ${c || ''}" href="${u}" target="_blank" rel="noopener">${i} ${t}</a>`).join('');
+/* ---------- Header: greeting ---------- */
 if (q.get('name')) document.getElementById('name').textContent = q.get('name');
 function greet() {
   const p = partsIn(TZ);
@@ -496,6 +488,7 @@ function semInfo(p) {
     const n = Math.max(4, sessions.n);
     document.getElementById('dots').innerHTML = Array.from({ length: n }, (_, i) => `<i class="${i < sessions.n ? 'on' : ''}"></i>`).join(' ');
     if (!st.running) document.getElementById('fnote').textContent = notes[st.mode];
+    document.getElementById('today-chip').textContent = st.running ? `● ${MODES[st.mode][1]} · ${pad(Math.floor(l / 60))}:${pad(l % 60)}` : `${sessions.n} focus session${sessions.n === 1 ? '' : 's'} today`;
     if (st.running && l === 0) {
       st.running = false; chime();
       if (st.mode === 'focus') { sessions.n++; st.mode = sessions.n % 4 === 0 ? 'long' : 'short'; }
