@@ -13,3 +13,5 @@ Options: `theme=light|dark`, `bg=transparent`, `tz=Europe/Berlin`,
 `sem=2026-10-01,2027-03-31&semname=WS 26/27` (date).
 
 Map tiles © Esri · Weather by Open-Meteo.
+
+Live at https://haroonali7816.github.io/notion-widgets/
