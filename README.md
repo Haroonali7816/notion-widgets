@@ -4,6 +4,7 @@ Embeddable dashboard widgets for Notion. Use `/embed` in Notion with these links
 
 | Widget | Link |
 |---|---|
+| **Home dashboard (all-in-one)** | `https://haroonali7816.github.io/notion-widgets/hero/` |
 | Location (Saarbrücken map, live time, weather) | `https://haroonali7816.github.io/notion-widgets/?w=location&theme=dark` |
 | Clock (analog + digital) | `https://haroonali7816.github.io/notion-widgets/?w=clock&theme=dark` |
 | Date (day, KW, semester & year progress, calendar) | `https://haroonali7816.github.io/notion-widgets/?w=date&theme=dark` |
